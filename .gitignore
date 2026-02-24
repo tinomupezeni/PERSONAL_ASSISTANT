@@ -1,0 +1,29 @@
+# Secrets
+credentials.json
+token.json
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+.claude/
+
+# Logs
+*.log
+
+# Test files
+test_audio.wav
+nul
+
+# Optional: Uncomment to NOT sync memory/activity data
+# data/memory/
+# data/activity/
+# data/briefs/
