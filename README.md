@@ -40,6 +40,8 @@ An AI agent inspired by JARVIS that manages your professional life with executiv
 - [x] **Deep Research** - Web search + content extraction + LLM synthesis
 - [x] **Memory System** - Ada learns and remembers your goals, projects, patterns
 - [x] **Learning Sessions** - Interactive sessions to teach Ada about you
+- [x] **GitHub Sync** - Auto-push code and memory to GitHub
+- [x] **Self-Improvement** - Ada identifies gaps in her functionality and suggests fixes
 
 ---
 
@@ -224,6 +226,87 @@ Known Facts:
 
 ---
 
+## GitHub Sync
+
+Ada automatically syncs her code and memory to GitHub, enabling backups and cross-device access.
+
+### Commands
+
+```
+/sync             Push all changes to GitHub
+/sync <message>   Push with custom commit message
+/pull             Pull latest changes
+```
+
+### Automatic Sync
+
+The daemon automatically syncs every 6 hours:
+- Code changes
+- Memory data (profile, facts, patterns)
+- Research history
+- Brief history
+
+### Repository
+
+Code is pushed to: `https://github.com/tinomupezeni/PERSONAL_ASSISTANT.git`
+
+---
+
+## Self-Improvement
+
+Ada can analyze her own codebase, identify gaps, and suggest improvements.
+
+### Commands
+
+```
+/improve          Run self-analysis and get AI suggestions
+/gaps             Show all identified gaps
+/gap <desc>       Report a gap or issue you noticed
+```
+
+### What Ada Analyzes
+
+| Category | What It Checks |
+|----------|----------------|
+| **Code Structure** | Total files, functions, classes |
+| **Incomplete Code** | Functions with `pass` or `NotImplemented` |
+| **TODOs** | TODO/FIXME comments in code |
+| **README vs Code** | Features claimed vs implemented |
+| **Error Patterns** | Common failures from logs |
+| **Known Issues** | Architectural limitations |
+
+### Gap Severity Levels
+
+- **Critical** - Blocks core functionality
+- **High** - Significant limitation
+- **Medium** - Missing feature or improvement
+- **Low** - Nice to have
+
+### Example Output
+
+```
+==================================================
+  ADA SELF-ANALYSIS: IDENTIFIED GAPS
+==================================================
+
+Total open gaps: 8
+  Critical: 0 | High: 2 | Medium: 4 | Low: 2
+
+HIGH PRIORITY:
+  [1] Daemon stops when terminal closes
+      Fix: Convert to Windows Service or use Task Scheduler
+
+  [2] Voice input unreliable
+      Fix: Improve Whisper integration or accept typed input
+
+MEDIUM:
+  [3] missing_feature: Google Docs requires OAuth setup
+  [4] incomplete_code: memory.py:learn_from_conversation
+  [5] todo_item: google_docs.py:200 - "todo": "HAS TODOs"
+```
+
+---
+
 ## Design Philosophy (JARVIS-Inspired)
 
 Based on Tony Stark's AI assistant from Iron Man:
@@ -391,8 +474,11 @@ Agent/
 │   │   ├── facts.json
 │   │   ├── patterns.json
 │   │   └── insights.json
-│   └── research/         # Research history (JSON)
-│       └── 20260225_1430_topic.json
+│   ├── research/         # Research history (JSON)
+│   │   └── 20260225_1430_topic.json
+│   └── gaps/             # Self-analysis results
+│       ├── identified_gaps.json
+│       └── improvement_log.json
 └── prompts/
     └── ceo_brief.txt     # Customizable prompt rules
 ```
@@ -469,12 +555,14 @@ This agent is meant to evolve through versions:
 
 | File | Lines | Description |
 |------|-------|-------------|
-| `terminal_chat.py` | ~470 | Main chat interface with all commands |
+| `terminal_chat.py` | ~580 | Main chat interface with all commands |
 | `brief.py` | ~200 | CEO brief generator |
 | `memory.py` | ~410 | Learning and memory system |
-| `research.py` | ~265 | Deep web research |
+| `research.py` | ~275 | Deep web research |
+| `sync.py` | ~290 | GitHub sync module |
+| `self_analysis.py` | ~490 | Self-improvement and gap detection |
 | `commitments.py` | ~150 | Commitment tracking |
-| `daemon.py` | ~230 | Background service |
+| `daemon.py` | ~310 | Background service with auto-sync |
 | `voice.py` | ~320 | Voice output |
 | `activity_monitor.py` | ~200 | Window tracking |
 | `github_activity.py` | ~120 | GitHub API |
