@@ -1,0 +1,6 @@
+[submodule "Documents/projects/hbc web/vendor/ecc"]
+	path = Documents/projects/hbc web/vendor/ecc
+	url = https://github.com/affaan-m/everything-claude-code.git
+[submodule "Documents/projects/HBCA TEACHER/vendor/ecc"]
+	path = Documents/projects/HBCA TEACHER/vendor/ecc
+	url = https://github.com/affaan-m/everything-claude-code.git
